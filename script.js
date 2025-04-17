@@ -1,6 +1,6 @@
 
 
-let color=["red","blue ","green", "yellow"];
+let color=["red","blue","green", "yellow"];
 let gamePattern=[];
 let UserPattern=[];
 
@@ -28,7 +28,7 @@ UserPattern=[];
 
     level++;
     h2.innerText=`Level :${level}`;
-    let randInd=Math.floor(Math.random() * 3);
+    let randInd=Math.floor(Math.random() * 4);
     let randColor=color[randInd];
 
     gamePattern.push(randColor);
@@ -48,7 +48,7 @@ UserPattern=[];
 
 
 function btnFlash(btn){
-
+ 
 btn.classList.add("flash");
 
 setTimeout(()=>{
@@ -81,7 +81,14 @@ if(gamePattern[ind] == UserPattern[ind]){
 
 
 }else{
-    h2.innerText=`game Over.. Press any key to start`;
+    h2.innerHTML=`game Over.!. Your Score is <b>${level}</b>  <br> Press any key to start`;
+    playSound2();
+    let body= document.querySelector("body");
+   body.classList.add("danger");
+
+   setTimeout(()=>{
+    body.classList.remove("danger");
+   },500)
 
     reset();
 
@@ -97,17 +104,13 @@ function reset(){
     gamePattern=[];
     UserPattern=[];
 
-   let body= document.querySelector("body");
-   body.classList.add("danger");
-
-   setTimeout(()=>{
-    body.classList.remove("danger");
-   },500)
+   
 
 }
 
 function btnPress(){
-    console.log(this);
+    // console.log(this);
+    playSound();
     let btn=this;
     UserbtnFlash(btn);
 let usercolor=btn.getAttribute("id");
@@ -125,3 +128,14 @@ for(btn of allBtn){
 
 }
 
+function playSound(){
+
+    let audio = new Audio("sound.wav");
+    audio.play();
+}
+
+function playSound2(){
+
+    let audio = new Audio("sound2.mp3");
+    audio.play();
+}
